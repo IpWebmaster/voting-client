@@ -3,7 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 class Vote extends React.Component {
   static propTypes = {
-    pair: PropTypes.array.isRequired,
+    pair: PropTypes.object.isRequired,
     hasVoted: PropTypes.string.isRequired,
     vote: PropTypes.func.isRequired
   };

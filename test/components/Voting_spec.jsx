@@ -89,7 +89,6 @@ describe('Voting', () => {
       container
     );
     firstButton = scryRenderedDOMComponentsWithTag(component, 'button')[0];
-    console.log(firstButton.textContent);
     expect(firstButton.textContent).to.equal('Trainspotting');
   });
 
