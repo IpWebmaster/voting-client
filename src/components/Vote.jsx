@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 class Vote extends React.Component {
   static propTypes = {
@@ -6,6 +7,11 @@ class Vote extends React.Component {
     hasVoted: PropTypes.string.isRequired,
     vote: PropTypes.func.isRequired
   };
+
+  constructor(props) {
+    super(props);
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+  }
 
   getPair = () => this.props.pair || [];
 
