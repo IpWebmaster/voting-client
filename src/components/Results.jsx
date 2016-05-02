@@ -1,10 +1,13 @@
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
+import Winner from './Winner';
 
 class Results extends React.Component {
   static propTypes = {
     pair: PropTypes.object.isRequired,
-    tally: PropTypes.object.isRequired
+    tally: PropTypes.object.isRequired,
+    next: PropTypes.func.isRequired,
+    winner: PropTypes.string.isRequired
   };
 
   constructor(props) {
@@ -23,16 +26,24 @@ class Results extends React.Component {
 
   render() {
     return (
-      <div className="results">
-        {this.getPair().map(entry =>
-          <div key={entry} className="entry">
-            <h1>{entry}</h1>
-            <div className="voteCount">
-              {this.getVotes(entry)}
-            </div>
+      this.props.winner ? <Winner ref="winner" winner={this.props.winner} /> :
+        <div className="results">
+          <div className="tally">
+            {this.getPair().map(entry =>
+              <div key={entry} className="entry">
+                <h1>{entry}</h1>
+                <div className="voteCount">
+                  {this.getVotes(entry)}
+                </div>
+              </div>
+            )}
           </div>
-        )}
-      </div>
+          <div className="management">
+            <button ref="next" className="next" onClick={this.props.next} >
+              Next
+            </button>
+          </div>
+        </div>
     );
   }
 }
