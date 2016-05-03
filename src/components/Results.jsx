@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import Winner from './Winner';
+import { connect } from 'react-redux';
 
-class Results extends React.Component {
+export class Results extends React.Component {
   static propTypes = {
     pair: PropTypes.object.isRequired,
     tally: PropTypes.object.isRequired,
@@ -48,4 +49,12 @@ class Results extends React.Component {
   }
 }
 
-export default Results;
+function mapStateToProps(state) {
+  return {
+    pair: state.getIn(['vote', 'pair']),
+    tally: state.getIn(['vote', 'tally']),
+    winner: state.get('winner')
+  };
+}
+
+export const ResultsContainer = connect(mapStateToProps)(Results);
